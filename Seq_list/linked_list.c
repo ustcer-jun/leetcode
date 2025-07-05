@@ -6,6 +6,13 @@ void SeqLListInit(SL* ps){
     ps->size = 0;
     ps->capacity = 4;
 }
+void SeqLListDestroy(SL* ps){
+    assert(ps);
+    free(ps->a);
+    ps->a = NULL;
+    ps->size = 0;
+    ps->capacity =0;
+}
 
 void SeqLListPrint(SL* ps){
     assert(ps);
@@ -28,46 +35,13 @@ void Check_capacity(SL* ps){
     }
 }
 
-//尾插
-void SeqLListPushBack(SL* ps,SLDataType x){
-    assert(ps);
-    Check_capacity(ps);
-    ps->a[ps->size] = x;
-    ps->size++;
-} 
-//头插
-void SeqLListPushFront(SL* ps,SLDataType x){
-    assert(ps);
-    Check_capacity(ps);
-    for(int i = ps->size;i>0;i--){
-        ps->a[i] = ps->a[i-1];
-    }
-    ps->a[0] = x;
-    ps->size++;
-}
-//尾删
-void SeqLListPopBack(SL* ps){
-    assert(ps);
-    ps->a[ps->size] = 0;
-    ps->size--;
-}
-
-//头删
-void SeqLListPopFront(SL* ps){
-    assert(ps);
-    for(int i = 0;i<ps->size-1;i++){
-        ps->a[i] = ps->a[i+1];
-    }
-    ps->size--;
-
-}
-
 // 任意位置的插入和删除
 void SeqLListInsert(SL* ps,int pos,SLDataType x){
     assert(ps);
+    assert(pos >= 0 && pos <= ps->size);
     Check_capacity(ps);
-    for(int i = ps->size;i>pos;i--){
-        ps->a[i] = ps->a[i-1];
+    for(int i = ps->size-1;i>=pos;i--){
+        ps->a[i+1] = ps->a[i];
     }
     ps->a[pos] = x;
     ps->size++;
@@ -75,8 +49,49 @@ void SeqLListInsert(SL* ps,int pos,SLDataType x){
 }
 void SeqLListErase(SL* ps,int pos){
     assert(ps);
-    for(int i = pos;i<ps->size;i++){
+    assert(pos >= 0 && pos <= ps->size);
+    for(int i = pos-1;i<ps->size-1;i++){
         ps->a[i] = ps->a[i+1];
     }
     ps->size --;
 }
+
+
+//尾插
+void SeqLListPushBack(SL* ps,SLDataType x){
+    // assert(ps);
+    // Check_capacity(ps);
+    // ps->a[ps->size] = x;
+    // ps->size++;
+    SeqLListInsert(ps,ps->size,x);
+} 
+//头插
+void SeqLListPushFront(SL* ps,SLDataType x){
+    // assert(ps);
+    // Check_capacity(ps);
+    // for(int i = ps->size;i>0;i--){
+    //     ps->a[i] = ps->a[i-1];
+    // }
+    // ps->a[0] = x;
+    // ps->size++;
+    SeqLListInsert(ps,0,x);
+}
+//尾删
+void SeqLListPopBack(SL* ps){
+    // assert(ps);
+    // ps->a[ps->size-1] = 0;
+    // ps->size--;
+    SeqLListErase(ps,ps->size);
+}
+
+//头删
+void SeqLListPopFront(SL* ps){
+    // assert(ps);
+    // for(int i = 0;i<ps->size-1;i++){
+    //     ps->a[i] = ps->a[i+1];
+    // }
+    // ps->size--;
+    SeqLListErase(ps,0);
+
+}
+ 
