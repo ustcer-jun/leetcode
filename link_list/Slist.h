@@ -3,23 +3,26 @@
 #include<stdlib.h>
 #include<assert.h>
 
-typedef int SListDataType;
-
-
+typedef int SLDataType; 
 typedef struct SListNode
 {
-    SListDataType data;
+    SLDataType data;
     struct SListNode* next;
-    
-}SLTNode,SListNode;
+}SList,SListNode;
+
 
 void SListPrint(SListNode* Phead);
 
-SListNode* BuySListNode(SListDataType x);   
-//尾插，尾删
-void SListPushBack(SListNode** Phead,SListDataType x);
-void SListPopBack(SListNode** Phead);
+//增删查改
 
-//头插，头删
-void SListPushFront(SListNode** Phead,SListDataType x);
-void SListPopFront(SListNode** Phead);
+void SListPushBack(SListNode** Phead,SLDataType Val); //尾插
+void SListPushFront(SListNode** Pphead,SLDataType Val); // 头插
+
+void SListPopBack(SListNode** Pphead);
+void SListPopFront(SListNode** Pphead);
+
+// 任意位置插入和删除
+void SListInsert(SListNode** Pphead,int pos,SLDataType Val);
+void SListDelete(SListNode** Pphead,int pos);
+//链表的元素访问
+void SListFind(SListNode** Pphead,int pos);
