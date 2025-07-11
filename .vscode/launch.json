@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/junye/Desktop/Data_structures/Data_structure/Seq_list",
-      "program": "/Users/junye/Desktop/Data_structures/Data_structure/Seq_list/build/Debug/outDebug"
+      "cwd": "/Users/junye/Desktop/Data_structures/leet_code",
+      "program": "/Users/junye/Desktop/Data_structures/leet_code/build/Debug/outDebug"
     }
   ]
 }
